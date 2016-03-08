@@ -1,0 +1,24 @@
+/*
+ */
+module L2-services {
+    yang-version 1;
+    namespace "urn:b4n:L2-services";
+
+    prefix L2-services;
+    import ietf-yang-types { prefix "yang"; }
+    import ietf-inet-types { prefix "inet"; revision-date 2010-09-24; }
+    organization "Brain4Net";
+
+    contact "Kirill Varlamov <k.varlamov@brain4net.com>";
+
+    description "This YANG module defines L2 Services model for B4N Orchestrator";
+
+    revision "2016-03-12" {
+        description
+                "Brain4Net";
+    }
+    container "L2-services" {
+        leaf-list interfaces {
+        }
+    }
+}
