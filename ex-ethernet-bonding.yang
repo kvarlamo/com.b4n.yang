@@ -1,7 +1,9 @@
 /*
-* Got from https://github.com/xsited/sdn/blob/master/yang/ietf/ex-ethernet-bonding.yang
-*
+* imported from rfc7223 with rfcstrip utility 
+* IT's not in standard. ex- = EXample.
+* we need to refactor in in future
 */
+
 module ex-ethernet-bonding {
   namespace "http://example.com/ethernet-bonding";
   prefix "bond";
@@ -9,16 +11,21 @@ module ex-ethernet-bonding {
   import ietf-interfaces {
     prefix if;
   }
+  import iana-if-type {
+    prefix ianaift;
+  }
+
+
 
   augment "/if:interfaces/if:interface" {
-    when "if:type = 'ieee8023adLag'";
+    when "if:type = 'ianaift:ieee8023adLag'";
 
     leaf-list slave-if {
       type if:interface-ref;
       must "/if:interfaces/if:interface[if:name = current()]"
-         + "/if:type = 'ethernetCsmacd'" {
+         + "/if:type = 'ianaift:ethernetCsmacd'" {
         description
-          "The type of a slave interface must be ethernet.";
+          "The type of a slave interface must be 'ethernetCsmacd'.";
       }
     }
     leaf bonding-mode {
@@ -28,6 +35,6 @@ module ex-ethernet-bonding {
         enum broadcast;
       }
     }
-    // other bonding config params, failover times etc.
+    // other bonding config params, failover times, etc.
   }
 }
